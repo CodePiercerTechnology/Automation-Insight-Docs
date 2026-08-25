@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Automation Insight User Manual</title>
+    <style>
+      :root {
+        --navy: #07182b;
+        --green: #59e000;
+        --ink: #172033;
+        --muted: #64748b;
+        --line: #dbe3ec;
+        --soft: #f6f8fb;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        color: var(--ink);
+        font:
+          14px/1.62 Inter,
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          sans-serif;
+      }
+      .layout {
+        display: grid;
+        grid-template-columns: 270px minmax(0, 1fr);
+        min-height: 100vh;
+      }
+      .side {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow: auto;
+        padding: 26px 18px;
+        background: var(--navy);
+        color: #fff;
+      }
+      .brand {
+        margin-bottom: 24px;
+      }
+      .brand b {
+        font-size: 18px;
+      }
+      .brand small {
+        display: block;
+        color: #9fb0c2;
+      }
+      .side h4 {
+        margin: 20px 8px 7px;
+        color: #7890a7;
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .side a {
+        display: block;
+        padding: 7px 9px;
+        border-radius: 7px;
+        color: #dce7f2;
+        text-decoration: none;
+      }
+      .side a:hover {
+        background: #ffffff12;
+      }
+      .hero {
+        padding: 66px clamp(28px, 6vw, 82px);
+        color: #fff;
+        background: linear-gradient(135deg, var(--navy), #0d2d50);
+      }
+      .eyebrow {
+        color: var(--green);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .hero h1 {
+        max-width: 900px;
+        margin: 10px 0 16px;
+        font-size: clamp(38px, 5vw, 62px);
+        line-height: 1.05;
+      }
+      .hero p {
+        max-width: 850px;
+        color: #c7d3df;
+        font-size: 18px;
+      }
+      .content {
+        max-width: 1120px;
+        padding: 44px clamp(28px, 6vw, 82px) 96px;
+      }
+      section {
+        margin-bottom: 60px;
+        scroll-margin-top: 18px;
+      }
+      h2 {
+        margin: 0 0 15px;
+        color: #0b1d33;
+        font-size: 30px;
+      }
+      h3 {
+        margin: 28px 0 10px;
+        color: #163b5f;
+        font-size: 19px;
+      }
+      .lead {
+        max-width: 900px;
+        color: #465568;
+        font-size: 18px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 15px;
+      }
+      .card {
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 11px;
+      }
+      .card h3 {
+        margin: 0 0 5px;
+        font-size: 16px;
+      }
+      .card p {
+        margin: 0;
+        color: var(--muted);
+      }
+      .callout {
+        margin: 18px 0;
+        padding: 14px 16px;
+        border-left: 4px solid #4b9ce2;
+        border-radius: 6px;
+        background: #eef7ff;
+      }
+      .warn {
+        border-color: #e4b521;
+        background: #fff7d6;
+      }
+      .shot {
+        margin: 22px 0;
+      }
+      .shot img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: 0 4px 16px #0f172a12;
+      }
+      .shot figcaption {
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      table {
+        width: 100%;
+        margin: 14px 0 22px;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 9px 11px;
+        border: 1px solid var(--line);
+        vertical-align: top;
+        text-align: left;
+      }
+      th {
+        background: #eef3f8;
+      }
+      code {
+        padding: 0.12em 0.35em;
+        border-radius: 4px;
+        background: #eef2f6;
+        font-family: Consolas, monospace;
+        font-size: 0.9em;
+      }
+      pre {
+        padding: 16px;
+        border-radius: 9px;
+        overflow: auto;
+        background: #0f172a;
+        color: #dbeafe;
+      }
+      pre code {
+        padding: 0;
+        background: none;
+        color: inherit;
+      }
+      @media (max-width: 900px) {
+        .layout {
+          display: block;
+        }
+        .side {
+          position: relative;
+          height: auto;
+        }
+        .side nav {
+          columns: 2;
+        }
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 600px) {
+        .side nav {
+          columns: 1;
+        }
+        .hero {
+          padding: 44px 22px;
+        }
+        .content {
+          padding: 34px 22px 70px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="side">
+        <div class="brand">
+          <b>Automation Insight</b><small>User Manual · 0.2.0</small>
+        </div>
+        <h4>Contents</h4>
+        <nav>
+          <a href="#overview">Overview</a><a href="#start">Quick start</a
+          ><a href="#explorer">Controller Explorer</a
+          ><a href="#viewers">Logic viewers</a
+          ><a href="#diagnostics">PLC Diagnostics</a
+          ><a href="#tags">Tags & AOIs</a><a href="#themes">Themes & settings</a
+          ><a href="#help">Instruction help</a
+          ><a href="#partial">Partial exports</a
+        </nav>
+      </aside>
+      <main>
+        <header class="hero">
+          <div class="eyebrow">Visual Studio Code · Rockwell L5X</div>
+          <h1>Automation Insight User Manual</h1>
+          <p>
+            Read, visualize, navigate, and analyze Rockwell Logix controller and
+            component exports with purpose-built Ladder, FBD, Structured Text,
+            tag, cross-reference, and diagnostic views.
+          </p>
+        </header>
+        <div class="content">
+          <section id="overview">
+            <h2>Overview</h2>
+            <p class="lead">
+              Automation Insight is an inspection and static-analysis extension
+              for Rockwell Logix <code>.L5X</code> exports.
+            </p>
+            <div class="grid">
+              <div class="card">
+                <h3>Navigate</h3>
+                <p>
+                  Browse controller and program tags, standard and safety tasks,
+                  programs, routines, AOIs, data types, motion groups, and axes.
+                </p>
+              </div>
+              <div class="card">
+                <h3>Visualize</h3>
+                <p>
+                  Open Ladder, Function Block, and Structured Text logic in
+                  dedicated viewers.
+                </p>
+              </div>
+              <div class="card">
+                <h3>Analyze</h3>
+                <p>
+                  Filter diagnostics by severity, search text, and rule type.
+                </p>
+              </div>
+            </div>
+            <div class="callout warn">
+              <b>Engineering note.</b> Automation Insight does not replace
+              Studio 5000 validation, machine-safety review, commissioning, or
+              controller testing.
+            </div>
+          </section>
+          <section id="start">
+            <h2>Quick start</h2>
+            <ol>
+              <li>
+                Install the VSIX with <b>Extensions: Install from VSIX…</b>.
+              </li>
+              <li>Open a <code>.L5X</code> or <code>.l5x</code> export.</li>
+              <li>
+                Select the PLC-shaped Automation Insight Activity Bar icon.
+              </li>
+              <li>
+                Open routines from the Controller Explorer and findings from
+                <b>PLC Diagnostics</b>. Reopening an item focuses its existing
+                tab.
+              </li>
+            </ol>
+          </section>
+          <section id="explorer">
+            <h2>Controller Explorer</h2>
+            <p>
+              The explorer follows the active L5X and exposes Controller,
+              Tasks, Motion Groups, and Assets areas. Context actions include <b>Open</b>,
+              <b>Cross Reference</b>, <b>Open Tags</b>,
+              <b>Open Instruction Logic</b>, <b>Copy Name</b>, and
+              expand/collapse controls. The pulse button opens PLC Diagnostics
+              and indicates when complete analysis is still running.
+            </p>
+            <figure class="shot">
+              <img
+                src="assets/screenshots/01-controller-explorer.png"
+                alt="Automation Insight Controller Explorer"
+              />
+              <figcaption>
+                Controller Explorer showing tasks, safety hierarchy, programs,
+                routines, AOIs, motion groups, axes, and data types.
+              </figcaption>
+            </figure>
+          </section>
+          <section id="viewers">
+            <h2>Logic viewers</h2>
+            <p>
+              The screenshots intentionally mix the built-in Light and Dark
+              appearances. <b>Auto</b> follows the current VS Code appearance.
+            </p>
+            <h3>Ladder Diagram</h3>
+            <p>
+              Scalable SVG with zoom, pan, fit/fixed zoom, configurable text
+              size and density, comment visibility, long-rung wrapping, source
+              navigation, rung diagnostics, breadcrumbs, BOOL state highlighting,
+              and instance-bound AOI logic navigation.
+            </p>
+            <figure class="shot">
+              <img
+                src="assets/screenshots/02-ladder-view.png"
+                alt="Ladder routine viewer in light theme"
+              />
+              <figcaption>
+                Ladder routine with reusable AOI calls in the Dark appearance.
+              </figcaption>
+            </figure>
+            <h3>Function Block Diagram</h3>
+            <p>
+              Coordinate-aware rendering of blocks, references, ports,
+              constants, sheets, routed connections, annotations, and AOI
+              definition/instance navigation.
+            </p>
+            <figure class="shot">
+              <img
+                src="assets/screenshots/03-function-block-view.png"
+                alt="Function Block Diagram viewer in light theme"
+              />
+              <figcaption>
+                Function Block Diagram with references, connections, and AOI
+                ports in the Light appearance.
+              </figcaption>
+            </figure>
+            <h3>Structured Text</h3>
+            <p>
+              Exported source with readable token styling, indentation,
+              interactive symbols, comments, diagnostics, BOOL state
+              highlighting, and member-aware cross references.
+            </p>
+            <figure class="shot">
+              <img
+                src="assets/screenshots/04-structured-text-view.png"
+                alt="Structured Text viewer in dark theme"
+              />
+              <figcaption>
+                Structured Text with syntax styling and viewer controls in the
+                Dark appearance.
+              </figcaption>
+            </figure>
+            <p>
+              Each view retains its scroll position and display state when tabs
+              are switched. FBD also retains the selected sheet. Diagnostic and
+              cross-reference navigation selects the exact instruction; clicking
+              elsewhere clears the selection.
+            </p>
+          </section>
+          <section id="diagnostics">
+            <h2>PLC Diagnostics</h2>
+            <p>
+              The toolbar keeps controller name, Error/Warning/Information/Hint
+              filters, search, diagnostic-type filter, Reset, and visible-result
+              count on one row. Findings are ordered by severity and the running
+              indicator remains visible until complete analysis finishes.
+            </p>
+            <figure class="shot">
+              <img
+                src="assets/screenshots/05-plc-diagnostics.png"
+                alt="PLC Diagnostics panel"
+              />
+              <figcaption>
+                PLC Diagnostics with severity filters and detailed findings.
+              </figcaption>
+            </figure>
+            <table>
+              <tr>
+                <th>Severity</th>
+                <th>Use</th>
+              </tr>
+              <tr>
+                <td>Error</td>
+                <td>Investigate first.</td>
+              </tr>
+              <tr>
+                <td>Warning</td>
+                <td>
+                  Potentially unsafe, suspicious, or ambiguous behavior that may
+                  still be intentional.
+                </td>
+              </tr>
+              <tr>
+                <td>Information</td>
+                <td>Engineering observation.</td>
+              </tr>
+              <tr>
+                <td>Hint</td>
+                <td>Low-severity cleanup or maintainability guidance.</td>
+              </tr>
+            </table>
+            <p>
+              Multi-location findings expand into navigable source rows. State
+              owned by AOI implementation logic is reported at the internal AOI
+              instruction instead of being duplicated on every invocation rung;
+              caller InOut mappings are still used to prove reset paths.
+            </p>
+          </section>
+          <section id="tags">
+            <h2>Tags, AOIs & cross references</h2>
+            <h3>Tag tables</h3>
+            <p>
+              Tag tables expose names, values, types, descriptions, class,
+              constants, aliases, nested members, array elements, and integer
+              bits. Scope/property/text filters and resizable columns keep large
+              tables readable.
+            </p>
+            <figure class="shot">
+              <img
+                src="assets/screenshots/06-tag-table.png"
+                alt="Controller tag table in light theme"
+              />
+              <figcaption>
+                Controller tag table with scope, filtering, descriptions, and
+                expandable structures.
+              </figcaption>
+            </figure>
+            <h3>Cross references</h3>
+            <p>
+              Cross Reference helps locate object usage without manually
+              searching XML. Every result row is navigable and restores the
+              exact routine, sheet/rung/line, and instruction when available.
+            </p>
+            <figure class="shot">
+              <img
+                src="assets/screenshots/07-cross-reference.png"
+                alt="Cross-reference results in dark theme"
+              />
+              <figcaption>
+                Controller-wide cross-reference results with routine and
+                location context.
+              </figcaption>
+            </figure>
+            <h3>AOI definitions</h3>
+            <p>
+              AOI views expose definition metadata, members, resizable columns,
+              and implementation logic. Invocation actions can open the specific
+              instance context with exported values or the reusable definition.
+            </p>
+            <figure class="shot">
+              <img
+                src="assets/screenshots/08-aoi-definition.png"
+                alt="AOI definition member table in light theme"
+              />
+              <figcaption>AOI definition and member table.</figcaption>
+            </figure>
+          </section>
+          <section id="themes">
+            <h2>Themes & settings</h2>
+            <p>
+              Automation Insight provides <b>Auto</b>, <b>Dark</b>, and
+              <b>Light</b> view themes. Auto follows the current VS Code
+              appearance. Search VS Code Settings for
+              <b>Automation Insight</b> to configure viewer defaults.
+            </p>
+            <p>
+              Use <b>Automation Insight: Manage View Themes</b> to select a
+              theme, create a named JSON theme from the managed template, open
+              the custom-theme folder, or reload discovered theme files. View
+              themes do not change the VS Code workbench; the native Controller
+              Explorer continues to follow VS Code.
+            </p>
+            <table>
+              <tr>
+                <th>Setting</th>
+                <th>Default</th>
+              </tr>
+              <tr>
+                <td><code>automationInsight.zoomLevel</code></td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <td><code>automationInsight.textSize</code></td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td><code>automationInsight.defaultZoomMode</code></td>
+                <td>fitWidth</td>
+              </tr>
+              <tr>
+                <td><code>automationInsight.ladderDensity</code></td>
+                <td>standard</td>
+              </tr>
+              <tr>
+                <td><code>automationInsight.longRungLayout</code></td>
+                <td>wrap</td>
+              </tr>
+              <tr>
+                <td><code>automationInsight.maxRungWrapLevels</code></td>
+                <td>4</td>
+              </tr>
+              <tr>
+                <td><code>automationInsight.showComments</code></td>
+                <td>all</td>
+              </tr>
+              <tr>
+                <td><code>automationInsight.maxArrayExpansion</code></td>
+                <td>250</td>
+              </tr>
+            </table>
+          </section>
+          <section id="help">
+            <h2>Studio 5000 instruction help</h2>
+            <p>
+              Automation Insight discovers locally installed Studio 5000 help,
+              preferring the exact controller revision when available and
+              otherwise falling back within the compatible v21–35 or v36+
+              family.
+            </p>
+            <pre><code>C:\Program Files (x86)\Rockwell Software\Studio 5000\Logix Designer\ENU</code></pre>
+            <p>
+              For a nonstandard installation, set
+              <code>AUTOMATION_INSIGHT_STUDIO_HELP_ROOT</code> and restart VS
+              Code.
+            </p>
+          </section>
+          <section id="partial">
+            <h2>Partial L5X exports</h2>
+            <p>
+              Supported component exports include programs, routines, routine
+              content, AOIs, data types, tags, tasks, and FBD content.
+              Diagnostics are intentionally conservative when project-wide
+              context is absent. Use a full Controller export for the broadest
+              completeness analysis. A natural single-item export opens directly
+              in its matching viewer while preserving native XML access.
+            </p>
+          </section>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

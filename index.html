@@ -414,7 +414,11 @@
               <li>
                 Install the VSIX with <b>Extensions: Install from VSIX…</b>.
               </li>
-              <li>Open a <code>.L5X</code> or <code>.l5x</code> export.</li>
+              <li>
+                Open a <code>.L5X</code>/<code>.l5x</code> export, or open a
+                repository folder containing
+                <code>RSLogix5000Content/RSLogix5000Content.xml</code>.
+              </li>
               <li>
                 Select the PLC-shaped Automation Insight Activity Bar icon.
               </li>
@@ -434,6 +438,15 @@
               <b>Open Instruction Logic</b>, <b>Copy Name</b>, and
               expand/collapse controls. The pulse button opens PLC Diagnostics
               and indicates when complete analysis is still running.
+            </p>
+            <p>
+              Rockwell SDK/VCS exploded repositories use the same Explorer and
+              viewers. Automation Insight discovers controller candidates
+              without parsing all of them; use Open Controller, or the VS Code
+              File Explorer context action, to activate one controller at a
+              time. The global XML button opens its read-only aggregate source.
+              Automation Insight does not rewrite exploded XML or Structured
+              Text files.
             </p>
             <figure class="shot">
               <img
